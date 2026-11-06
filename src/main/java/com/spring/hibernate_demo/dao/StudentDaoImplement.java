@@ -1,10 +1,13 @@
 package com.spring.hibernate_demo.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.spring.hibernate_demo.entity.Student;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
 @Repository
@@ -25,5 +28,15 @@ public class StudentDaoImplement implements StudentDao {
     @Override
     public Student findById(Integer id) {
         return em.find(Student.class, id);
+    }
+
+    @Override
+    public List<Student> findAll() {
+        TypedQuery<Student> query = em.createQuery(
+            "FROM Student order by lastName", 
+            Student.class
+        );
+
+        return query.getResultList();
     }
 }

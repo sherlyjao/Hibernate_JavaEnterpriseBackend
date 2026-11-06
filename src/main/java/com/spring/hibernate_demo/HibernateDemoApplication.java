@@ -1,5 +1,7 @@
 package com.spring.hibernate_demo;
 
+import java.util.List;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,8 +21,19 @@ public class HibernateDemoApplication {
 	CommandLineRunner commandLineRunner(StudentDao studentDao) {
 		return runner -> {
 			createStudent(studentDao);
-			readStudent(studentDao);
+			// readStudent(studentDao);
+			queryStudents(studentDao);
 		};
+	}
+
+	private void queryStudents(StudentDao studentDao) {
+		//get list of all students
+		List<Student> students = studentDao.findAll();
+
+		//display
+		for(Student s:students) {
+			System.out.println(s);
+		}
 	}
 
 	private void readStudent(StudentDao studentDao) {
@@ -36,15 +49,15 @@ public class HibernateDemoApplication {
 		//Creating student
 		System.out.println("Creating student information...");
 		Student student1 = new Student(
-			"Ana",
-			"Alimurung",
-			"ana.alimurung@email.com"
+			"Wakatoshi",
+			"Ushijima",
+			"ushiwaka@email.com"
 		);
 
 		Student student2 = new Student(
-			"Bambi",
-			"Bascug",
-			"bambi.bascug@email.com"
+			"Zoro",
+			"Roronoa",
+			"three.swords@email.com"
 		);
 
 		//Saving student
