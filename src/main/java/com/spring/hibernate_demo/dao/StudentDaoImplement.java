@@ -56,4 +56,14 @@ public class StudentDaoImplement implements StudentDao {
     public void update(Student theStudent) {
         em.merge(theStudent);
     }
+
+    @Override
+    @Transactional
+    public void delete(Integer id) {
+        //retrieve student
+        Student student = em.find(Student.class, id);
+
+        //delete
+        em.remove(student);
+    }
 }

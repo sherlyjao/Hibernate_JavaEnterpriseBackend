@@ -22,10 +22,19 @@ public class HibernateDemoApplication {
 		return runner -> {
 			createStudent(studentDao);
 			// readStudent(studentDao);
-			// queryStudents(studentDao);
+			deleteStudent(studentDao);
+			queryStudents(studentDao);
 			// queryStudentLastName(studentDao);
-			updateStudent(studentDao);
+			// updateStudent(studentDao);
 		};
+	}
+
+	private void deleteStudent(StudentDao studentDao) {
+		//retrieve by specific id
+		int id = 1;
+		System.out.println("Delete ID: " + id);
+
+		studentDao.delete(id);
 	}
 
 	private void updateStudent(StudentDao studentDao) {
