@@ -29,12 +29,12 @@ public class HibernateDemoApplication {
 	CommandLineRunner commandLineRunner(StudentDao studentDao) {
 		return runner -> {
 			createStudent(studentDao);
-			readStudent(studentDao);
-			deleteStudent(studentDao);
-			deleteAllStudents(studentDao);
+			// readStudent(studentDao);
+			// deleteStudent(studentDao);
+			// deleteAllStudents(studentDao);
 			queryStudents(studentDao);
 			queryStudentLastName(studentDao);
-			updateStudent(studentDao);
+			// updateStudent(studentDao);
 		};
 	}
 
@@ -110,14 +110,22 @@ public class HibernateDemoApplication {
 			"three.swords@email.com"
 		);
 
+		Student student3 = new Student(
+			"Sherly",
+			"Ushijima",
+			"ushiwaka@email.com"
+		);
+
 		//Saving student
 		System.out.println("Saving student information...");
 		studentDao.save(student1);
 		studentDao.save(student2);
+		studentDao.save(student3);
 
 		//display student id for confirmation
 		System.out.println("Saved! Generated id: " + student1.getId());
 		System.out.println("Saved! Generated id: " + student2.getId());
+		System.out.println("Saved! Generated id: " + student3.getId());
 	}
 
 }
