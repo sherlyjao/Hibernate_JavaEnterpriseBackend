@@ -7,24 +7,30 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+/**
+ * The Student entity mapped to 'student' table in Oracle.
+ */
 @Entity 
-@Table
+// @Table
 public class Student {
 
+    //Fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    // @Column
     private int id;
 
-    @Column
+    // @Column
     private String firstName;
 
-    @Column
+    // @Column
     private String lastName;
 
-    @Column
+    // @Column
     private String email;
 
+
+    //Constructors
     public Student() {
     }
 
@@ -34,6 +40,8 @@ public class Student {
         this.email = email;
     }
 
+
+    //Setters
     public void setId(int id) {
         this.id = id;
     }
@@ -50,6 +58,8 @@ public class Student {
         this.email = email;
     }
 
+
+    //Getters
     public int getId() {
         return id;
     }

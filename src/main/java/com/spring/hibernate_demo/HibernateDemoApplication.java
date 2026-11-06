@@ -1,15 +1,17 @@
 package com.spring.hibernate_demo;
 
 import java.util.List;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
 import com.spring.hibernate_demo.dao.StudentDao;
 import com.spring.hibernate_demo.entity.Student;
 
+/**
+ * Main Spring Boot configuration HibernateDemoApplication.
+ * Entry point for Hibernate Demo application.
+ */
 @SpringBootApplication
 public class HibernateDemoApplication {
 
@@ -17,6 +19,12 @@ public class HibernateDemoApplication {
 		SpringApplication.run(HibernateDemoApplication.class, args);
 	}
 
+	/**
+	 * Executes initial database operations immediately after ApplicationContext loads.
+	 * 
+	 * @param studentDao the injected component for database access.
+	 * @return a CommandLineRunner instance
+	 */
 	@Bean
 	CommandLineRunner commandLineRunner(StudentDao studentDao) {
 		return runner -> {
