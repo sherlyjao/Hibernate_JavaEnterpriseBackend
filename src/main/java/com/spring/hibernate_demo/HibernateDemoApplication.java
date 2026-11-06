@@ -29,12 +29,12 @@ public class HibernateDemoApplication {
 	CommandLineRunner commandLineRunner(StudentDao studentDao) {
 		return runner -> {
 			createStudent(studentDao);
-			// readStudent(studentDao);
-			// deleteStudent(studentDao);
-			// deleteAllStudents(studentDao);
-			// queryStudents(studentDao);
-			// queryStudentLastName(studentDao);
-			// updateStudent(studentDao);
+			readStudent(studentDao);
+			deleteStudent(studentDao);
+			deleteAllStudents(studentDao);
+			queryStudents(studentDao);
+			queryStudentLastName(studentDao);
+			updateStudent(studentDao);
 		};
 	}
 
