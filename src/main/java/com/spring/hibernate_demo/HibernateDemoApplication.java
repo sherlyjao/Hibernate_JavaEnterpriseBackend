@@ -23,8 +23,24 @@ public class HibernateDemoApplication {
 			createStudent(studentDao);
 			// readStudent(studentDao);
 			// queryStudents(studentDao);
-			queryStudentLastName(studentDao);
+			// queryStudentLastName(studentDao);
+			updateStudent(studentDao);
 		};
+	}
+
+	private void updateStudent(StudentDao studentDao) {
+		//retrieve by specific id
+		int id = 1;
+		System.out.println("Student ID: " + id);
+		Student student = studentDao.findById(id);
+
+		//change first name
+		System.out.println("Updating student name...");
+		student.setFirstName("Sherly");
+
+		//update
+		studentDao.update(student);
+		System.out.println("Updated student information: " + student);
 	}
 
 	private void queryStudentLastName(StudentDao studentDao) {
