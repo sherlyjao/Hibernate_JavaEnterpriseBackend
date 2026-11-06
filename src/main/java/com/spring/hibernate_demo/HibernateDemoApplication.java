@@ -19,7 +19,16 @@ public class HibernateDemoApplication {
 	CommandLineRunner commandLineRunner(StudentDao studentDao) {
 		return runner -> {
 			createStudent(studentDao);
+			readStudent(studentDao);
 		};
+	}
+
+	private void readStudent(StudentDao studentDao) {
+		//retrieve based on id
+		System.out.println("Retrieving student id...");
+		Student student = studentDao.findById(2);
+
+		System.out.println("Found the student " + student);
 	}
 
 	private void createStudent(StudentDao studentDao) {

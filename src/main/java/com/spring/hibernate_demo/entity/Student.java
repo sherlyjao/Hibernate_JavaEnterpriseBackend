@@ -1,11 +1,11 @@
 package com.spring.hibernate_demo.entity;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
 @Entity 
 @Table
@@ -26,7 +26,6 @@ public class Student {
     private String email;
 
     public Student() {
-
     }
 
     public Student(String firstName, String lastName, String email) {

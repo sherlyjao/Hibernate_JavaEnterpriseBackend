@@ -21,4 +21,9 @@ public class StudentDaoImplement implements StudentDao {
     public void save(Student theStudent) {
         em.persist(theStudent);
     }
+
+    @Override
+    public Student findById(Integer id) {
+        return em.find(Student.class, id);
+    }
 }
