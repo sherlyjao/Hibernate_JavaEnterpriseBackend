@@ -26,18 +26,26 @@ public class HibernateDemoApplication {
 		
 		//Creating student
 		System.out.println("Creating student information...");
-		Student student = new Student(
-			"Sherly",
-			"Jao",
-			"jao.sherly@email.com"
+		Student student1 = new Student(
+			"Ana",
+			"Alimurung",
+			"ana.alimurung@email.com"
+		);
+
+		Student student2 = new Student(
+			"Bambi",
+			"Bascug",
+			"bambi.bascug@email.com"
 		);
 
 		//Saving student
 		System.out.println("Saving student information...");
-		studentDao.save(student);
+		studentDao.save(student1);
+		studentDao.save(student2);
 
 		//display student id for confirmation
-		System.out.println("Saved! Generated id: " + student.getId());
+		System.out.println("Saved! Generated id: " + student1.getId());
+		System.out.println("Saved! Generated id: " + student2.getId());
 	}
 
 }
