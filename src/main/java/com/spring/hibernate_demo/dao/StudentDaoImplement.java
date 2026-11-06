@@ -39,4 +39,21 @@ public class StudentDaoImplement implements StudentDao {
 
         return query.getResultList();
     }
+
+    @Override 
+    public List<Student> findByLastName(String lastName) {
+        TypedQuery<Student> query = em.createQuery(
+            "FROM Student WHERE lastName=:data", 
+            Student.class
+        );
+
+        query.setParameter("data", lastName);
+        return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void update(Student theStudent) {
+        em.merge(theStudent);
+    }
 }
