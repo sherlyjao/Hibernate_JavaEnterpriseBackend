@@ -23,8 +23,8 @@ public class HibernateDemoApplication {
 			createStudent(studentDao);
 			// readStudent(studentDao);
 			// deleteStudent(studentDao);
-			deleteAllStudents(studentDao);
-			queryStudents(studentDao);
+			// deleteAllStudents(studentDao);
+			// queryStudents(studentDao);
 			// queryStudentLastName(studentDao);
 			// updateStudent(studentDao);
 		};
