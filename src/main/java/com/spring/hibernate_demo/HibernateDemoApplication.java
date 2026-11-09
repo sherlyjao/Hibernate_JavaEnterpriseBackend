@@ -55,7 +55,7 @@ public class HibernateDemoApplication {
 
 	//== INSTRUCTOR entity mapping functions
 	private void deleteInstructorDetail(AppDao app) {
-		int id = 2;
+		int id = 3;
 		System.out.println("Delete id: " + id);
 
 		app.deleteInstructorDetail(id);
