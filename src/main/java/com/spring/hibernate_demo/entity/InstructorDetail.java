@@ -1,9 +1,11 @@
 package com.spring.hibernate_demo.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 /**
  * InstructorDetail entity mapped to instructordetail table.
@@ -18,6 +20,9 @@ public class InstructorDetail {
 
     private String subject;
     private String hobby;
+
+    @OneToOne(mappedBy = "instructorDetail", cascade = CascadeType.ALL)
+    private Instructor instructor;
 
 
     //Constructors
@@ -41,6 +46,10 @@ public class InstructorDetail {
     public void setHobby(String hobby) {
         this.hobby = hobby;
     }
+    
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
 
 
     //Getters
@@ -54,6 +63,10 @@ public class InstructorDetail {
 
     public String getHobby() {
         return hobby;
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
     }
 
 

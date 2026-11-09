@@ -3,6 +3,7 @@ package com.spring.hibernate_demo.dao;
 import org.springframework.stereotype.Repository;
 
 import com.spring.hibernate_demo.entity.Instructor;
+import com.spring.hibernate_demo.entity.InstructorDetail;
 
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
@@ -36,4 +37,16 @@ public class AppDaoImplement implements AppDao {
     public void deleteInstructorById(int theId) {
         em.remove(findInstructorById(theId));
     }
+
+    @Override 
+    public InstructorDetail findInstructorDetailById(int theId) {
+        return em.find(InstructorDetail.class, theId);
+    }
+
+    @Override
+    @Transactional
+    public void deleteInstructorDetail(int theId) {
+        em.remove(findInstructorDetailById(theId));
+    }
+    
 }
