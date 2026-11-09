@@ -5,7 +5,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import com.spring.hibernate_demo.dao.AppDao;
 import com.spring.hibernate_demo.dao.StudentDao;
+import com.spring.hibernate_demo.entity.Instructor;
+import com.spring.hibernate_demo.entity.InstructorDetail;
 import com.spring.hibernate_demo.entity.Student;
 
 /**
@@ -20,112 +24,142 @@ public class HibernateDemoApplication {
 	}
 
 	/**
-	 * Executes initial database operations immediately after ApplicationContext loads.
+	 * Executes initial database operations.
+	 * Immediately after ApplicationContext loads.
 	 * 
 	 * @param studentDao the injected component for database access.
+	 * @param AppDao the injected component used in Instructor implementation.
 	 * @return a CommandLineRunner instance
 	 */
+	// CommandLineRunner commandLineRunner(StudentDao studentDao) {
 	@Bean
-	CommandLineRunner commandLineRunner(StudentDao studentDao) {
+	CommandLineRunner commandLineRunner(AppDao app) {
 		return runner -> {
-			createStudent(studentDao);
-			readStudent(studentDao);
+			//== STUDENT entity
+			// createStudent(studentDao);
+			// readStudent(studentDao);
 			// deleteStudent(studentDao);
 			// deleteAllStudents(studentDao);
-			queryStudents(studentDao);
-			queryStudentLastName(studentDao);
+			// queryStudents(studentDao);
+			// queryStudentLastName(studentDao);
 			// updateStudent(studentDao);
+
+			//== INSTRUCTOR entity mapping
+			createInstructor(app);
 		};
 	}
 
-	private void deleteAllStudents(StudentDao studentDao) {
-		System.out.println("Deleting all student information...");
-		int rowsDeleted = studentDao.deleteAll();
-		System.out.println("Number of rows deleted: " + rowsDeleted);
+	//== INSTRUCTOR entity mapping functions
+	private void createInstructor(AppDao app) {
+		System.out.println("Creating instructor information...");
+
+		Instructor ins = new Instructor(
+			"Robin",
+			"Nico",
+			"nico.robin@email.com"
+		);
+
+		InstructorDetail deets = new InstructorDetail(
+			"Literature",
+			"Reading books"
+		);
+
+		ins.setInstructorDetail(deets);
+
+		System.out.println("Information saved!");
+		app.save(ins);
 	}
 
-	private void deleteStudent(StudentDao studentDao) {
-		//retrieve by specific id
-		int id = 1;
-		System.out.println("Delete ID: " + id);
 
-		studentDao.delete(id);
-	}
+	//== STUDENT entity functions
+	// private void deleteAllStudents(StudentDao studentDao) {
+	// 	System.out.println("Deleting all student information...");
+	// 	int rowsDeleted = studentDao.deleteAll();
+	// 	System.out.println("Number of rows deleted: " + rowsDeleted);
+	// }
 
-	private void updateStudent(StudentDao studentDao) {
-		//retrieve by specific id
-		int id = 1;
-		System.out.println("Student ID: " + id);
-		Student student = studentDao.findById(id);
+	// private void deleteStudent(StudentDao studentDao) {
+	// 	//retrieve by specific id
+	// 	int id = 1;
+	// 	System.out.println("Delete ID: " + id);
 
-		//change first name
-		System.out.println("Updating student name...");
-		student.setFirstName("Sherly");
+	// 	studentDao.delete(id);
+	// }
 
-		//update
-		studentDao.update(student);
-		System.out.println("Updated student information: " + student);
-	}
+	// private void updateStudent(StudentDao studentDao) {
+	// 	//retrieve by specific id
+	// 	int id = 1;
+	// 	System.out.println("Student ID: " + id);
+	// 	Student student = studentDao.findById(id);
 
-	private void queryStudentLastName(StudentDao studentDao) {
-		List<Student> students = studentDao.findByLastName("Ushijima");
+	// 	//change first name
+	// 	System.out.println("Updating student name...");
+	// 	student.setFirstName("Sherly");
 
-		//display
-		for(Student s:students) {
-			System.out.println(s);
-		}
-	}
+	// 	//update
+	// 	studentDao.update(student);
+	// 	System.out.println("Updated student information: " + student);
+	// }
 
-	private void queryStudents(StudentDao studentDao) {
-		//get list of all students
-		List<Student> students = studentDao.findAll();
+	// private void queryStudentLastName(StudentDao studentDao) {
+	// 	List<Student> students = studentDao.findByLastName("Ushijima");
 
-		//display
-		for(Student s:students) {
-			System.out.println(s);
-		}
-	}
+	// 	//display
+	// 	for(Student s:students) {
+	// 		System.out.println(s);
+	// 	}
+	// }
 
-	private void readStudent(StudentDao studentDao) {
-		//retrieve based on id
-		System.out.println("Retrieving student id...");
-		Student student = studentDao.findById(2);
+	// private void queryStudents(StudentDao studentDao) {
+	// 	//get list of all students
+	// 	List<Student> students = studentDao.findAll();
 
-		System.out.println("Found the student " + student);
-	}
+	// 	//display
+	// 	for(Student s:students) {
+	// 		System.out.println(s);
+	// 	}
+	// }
 
-	private void createStudent(StudentDao studentDao) {
+	// private void readStudent(StudentDao studentDao) {
+	// 	//retrieve based on id
+	// 	System.out.println("Retrieving student id...");
+	// 	Student student = studentDao.findById(2);
+
+	// 	System.out.println("Found the student " + student);
+	// }
+
+	// private void createStudent(StudentDao studentDao) {
 		
-		//Creating student
-		System.out.println("Creating student information...");
-		Student student1 = new Student(
-			"Wakatoshi",
-			"Ushijima",
-			"ushiwaka@email.com"
-		);
+	// 	//Creating student
+	// 	System.out.println("Creating student information...");
+	// 	Student student1 = new Student(
+	// 		"Wakatoshi",
+	// 		"Ushijima",
+	// 		"ushiwaka@email.com"
+	// 	);
 
-		Student student2 = new Student(
-			"Zoro",
-			"Roronoa",
-			"three.swords@email.com"
-		);
+	// 	Student student2 = new Student(
+	// 		"Zoro",
+	// 		"Roronoa",
+	// 		"three.swords@email.com"
+	// 	);
 
-		Student student3 = new Student(
-			"Sherly",
-			"Ushijima",
-			"ushiwaka@email.com"
-		);
+	// 	Student student3 = new Student(
+	// 		"Sherly",
+	// 		"Ushijima",
+	// 		"ushiwaka@email.com"
+	// 	);
 
-		//Saving student
-		System.out.println("Saving student information...");
-		studentDao.save(student1);
-		studentDao.save(student2);
-		studentDao.save(student3);
+	// 	//Saving student
+	// 	System.out.println("Saving student information...");
+	// 	studentDao.save(student1);
+	// 	studentDao.save(student2);
+	// 	studentDao.save(student3);
 
-		//display student id for confirmation
-		System.out.println("Saved! Generated id: " + student1.getId());
-		System.out.println("Saved! Generated id: " + student2.getId());
-		System.out.println("Saved! Generated id: " + student3.getId());
-	}
+	// 	//display student id for confirmation
+	// 	System.out.println("Saved! Generated id: " + student1.getId());
+	// 	System.out.println("Saved! Generated id: " + student2.getId());
+	// 	System.out.println("Saved! Generated id: " + student3.getId());
+	// }
 
 }

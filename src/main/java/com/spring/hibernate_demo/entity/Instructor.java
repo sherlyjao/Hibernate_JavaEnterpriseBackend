@@ -31,13 +31,11 @@ public class Instructor {
     public Instructor(
         String firstName, 
         String lastName, 
-        String email, 
-        InstructorDetail instructorDetail
+        String email
     ) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.instructorDetail = instructorDetail;
     }
 
 
