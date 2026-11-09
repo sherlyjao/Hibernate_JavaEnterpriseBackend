@@ -51,11 +51,39 @@ public class HibernateDemoApplication {
 			// deleteInstructor(app);
 			// findInstructorDetail(app);
 			// deleteInstructorDetail(app);
-			createInstructorWithCourse(app);
+			// createInstructorWithCourse(app);
+			// findInstructorWithCourse(app);
+			findCoursesForInstructor(app);
 		};
 	}
 
 	//== INSTRUCTOR entity mapping functions
+	private void findCoursesForInstructor(AppDao app) {
+		int id = 6;
+
+		//Find instructor
+		System.out.println("Find instructor id: "+ id);
+		Instructor ins = app.findInstructorById(id);
+		System.out.println("Instructor: " + ins);
+
+		//Get courses of instructor
+		System.out.println("Courses from id: " + id);
+		List<Course> courses = app.findCoursesByInstructorId(id);
+
+		//associate the objects
+		ins.setCourses(courses);
+		System.out.println(ins.getCourses());
+	}
+
+	private void findInstructorWithCourse(AppDao app) {
+		int id = 6;
+		System.out.println("Find instructor id: "+ id);
+		Instructor ins = app.findInstructorById(id);
+
+		System.out.println("Instructor: " + ins);
+		System.out.println("Courses: " + ins.getCourses());
+	}
+
 	private void createInstructorWithCourse(AppDao app) {
 		Instructor ins = new Instructor(
 			"Osamu", 
