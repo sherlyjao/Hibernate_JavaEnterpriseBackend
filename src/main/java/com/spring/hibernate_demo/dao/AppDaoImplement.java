@@ -82,4 +82,11 @@ public class AppDaoImplement implements AppDao {
         Instructor in = query.getSingleResult();
         return in;
     }
+
+    @Override
+    @Transactional
+    public void update(Instructor in) {
+        em.merge(in);
+    }
+    
 }
