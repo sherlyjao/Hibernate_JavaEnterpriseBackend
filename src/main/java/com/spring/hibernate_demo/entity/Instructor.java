@@ -90,7 +90,6 @@ public class Instructor {
             "Instructor [id=" + id + 
             ", firstName=" + firstName + 
             ", lastName=" + lastName + 
-            ", email=" + email + 
-            ", instructorDetail=" + instructorDetail + "]";
+            ", email=" + email + "]";
     }
 }
