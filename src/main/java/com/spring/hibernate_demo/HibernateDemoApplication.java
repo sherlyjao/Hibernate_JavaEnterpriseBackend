@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.spring.hibernate_demo.dao.AppDao;
 import com.spring.hibernate_demo.dao.StudentDao;
+import com.spring.hibernate_demo.entity.Course;
 import com.spring.hibernate_demo.entity.Instructor;
 import com.spring.hibernate_demo.entity.InstructorDetail;
 import com.spring.hibernate_demo.entity.Student;
@@ -49,11 +50,36 @@ public class HibernateDemoApplication {
 			// findInstructor(app);
 			// deleteInstructor(app);
 			// findInstructorDetail(app);
-			deleteInstructorDetail(app);
+			// deleteInstructorDetail(app);
+			createInstructorWithCourse(app);
 		};
 	}
 
 	//== INSTRUCTOR entity mapping functions
+	private void createInstructorWithCourse(AppDao app) {
+		Instructor ins = new Instructor(
+			"Osamu", 
+			"Dazai", 
+			"nolongerhuman@email.com"
+		);
+		
+		InstructorDetail deets = new InstructorDetail(
+			"Gun Safety",
+			"Double UnAliving"
+		);
+
+		ins.setInstructorDetail(deets);
+
+		Course course1 = new Course("History");
+		Course course2 = new Course("Politics");
+
+		ins.add(course1);
+		ins.add(course2);
+
+		System.out.println("Courses saved: " + ins.getCourses());
+		app.save(ins);
+	}
+
 	private void deleteInstructorDetail(AppDao app) {
 		int id = 3;
 		System.out.println("Delete id: " + id);
