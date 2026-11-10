@@ -46,6 +46,7 @@ public class HibernateDemoApplication {
 			// queryStudentLastName(studentDao);
 			// updateStudent(studentDao);
 
+			
 			//== INSTRUCTOR entity mapping
 			// createInstructor(app);
 			// findInstructor(app);

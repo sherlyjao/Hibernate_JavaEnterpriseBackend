@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+/**
+ * The Review entity mapped to tabled 'review' in Oracle.
+ */
 @Entity 
 public class Review {
 

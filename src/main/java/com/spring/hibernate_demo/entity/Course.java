@@ -2,7 +2,6 @@ package com.spring.hibernate_demo.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -15,6 +14,9 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
+/**
+ * The Course entity mapped to 'course' table in Oracle.
+ */
 @Entity
 public class Course {
 

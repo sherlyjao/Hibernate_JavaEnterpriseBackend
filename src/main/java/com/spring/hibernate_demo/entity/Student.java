@@ -2,10 +2,7 @@ package com.spring.hibernate_demo.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.CascadeType;
-// import jakarta.persistence.Column;
-// import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -17,22 +14,14 @@ import jakarta.persistence.ManyToMany;
  * The Student entity mapped to 'student' table in Oracle.
  */
 @Entity 
-// @Table
 public class Student {
 
-    //Fields
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // @Column
     private int id;
 
-    // @Column
     private String firstName;
-
-    // @Column
     private String lastName;
-
-    // @Column
     private String email;
 
     @ManyToMany (
@@ -46,7 +35,6 @@ public class Student {
         }
     )
     private List<Course> courses;
-
 
     
     //Constructors

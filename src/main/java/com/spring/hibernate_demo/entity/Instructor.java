@@ -2,7 +2,6 @@ package com.spring.hibernate_demo.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,6 +13,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
+/**
+ * The Instructor entity mapped to 'instructor' table in Oracle.
+ */
 @Entity 
 public class Instructor {
 

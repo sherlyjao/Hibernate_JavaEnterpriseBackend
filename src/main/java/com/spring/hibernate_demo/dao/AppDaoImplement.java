@@ -26,6 +26,10 @@ public class AppDaoImplement implements AppDao {
         this.em =  em;
     }
 
+
+    // ==========================================
+    // Save Operations
+    // ==========================================
     @Override 
     @Transactional
     public void save(Instructor theInstructor) {
@@ -38,29 +42,18 @@ public class AppDaoImplement implements AppDao {
         em.persist(theCourse);
     }
 
+
+    // ==========================================
+    // Find Operations
+    // ==========================================
     @Override
     public Instructor findInstructorById(int theId) {
         return em.find(Instructor.class, theId);
     }
 
     @Override 
-    @Transactional
-    public void deleteInstructorById(int theId) {
-        em.remove(findInstructorById(theId));
-    }
-
-    @Override 
     public InstructorDetail findInstructorDetailById(int theId) {
         return em.find(InstructorDetail.class, theId);
-    }
-
-    @Override
-    @Transactional
-    public void deleteInstructorDetail(int theId) {
-        InstructorDetail deets = findInstructorDetailById(theId);
-
-        deets.getInstructor().setInstructorDetail(null);
-        em.remove(deets);
     }
     
     @Override 
@@ -91,45 +84,8 @@ public class AppDaoImplement implements AppDao {
     }
 
     @Override
-    @Transactional
-    public void update(Instructor in) {
-        em.merge(in);
-    }
-
-    @Override 
-    @Transactional 
-    public void update(Student student) {
-        em.merge(student);
-    }
-    
-    @Override 
-    @Transactional 
-    public void updateCourse(Course tCourse) {
-        em.merge(tCourse);
-    }
-
-    @Override
     public Course findCourseById(int theId) {
         return em.find(Course.class, theId);
-    }
-
-    @Override 
-    @Transactional 
-    public void deleteInstructorOnlyById(int theId) {
-        Instructor in = findInstructorById(theId);
-        List<Course> courses = in.getCourses();
-        
-        for (Course course: courses) {
-            course.setInstructor(null);
-        }
-
-        em.remove(in);
-    }
-
-    @Override
-    @Transactional
-    public void deleteCourseById(int theId) {
-        em.remove(findCourseById(theId));
     }
 
     @Override 
@@ -174,6 +130,44 @@ public class AppDaoImplement implements AppDao {
         return student;
     }
 
+
+    // ==========================================
+    // Delete Operations
+    // ==========================================
+    @Override 
+    @Transactional
+    public void deleteInstructorById(int theId) {
+        em.remove(findInstructorById(theId));
+    }
+
+    @Override
+    @Transactional
+    public void deleteInstructorDetail(int theId) {
+        InstructorDetail deets = findInstructorDetailById(theId);
+
+        deets.getInstructor().setInstructorDetail(null);
+        em.remove(deets);
+    }
+
+    @Override 
+    @Transactional 
+    public void deleteInstructorOnlyById(int theId) {
+        Instructor in = findInstructorById(theId);
+        List<Course> courses = in.getCourses();
+        
+        for (Course course: courses) {
+            course.setInstructor(null);
+        }
+
+        em.remove(in);
+    }
+
+    @Override
+    @Transactional
+    public void deleteCourseById(int theId) {
+        em.remove(findCourseById(theId));
+    }
+
     @Override 
     @Transactional 
     public void deleteStudentById(int theId) {
@@ -189,5 +183,26 @@ public class AppDaoImplement implements AppDao {
 
         em.remove(student);
     }
+    
 
+    // ==========================================
+    // Update Operations
+    // ==========================================
+    @Override
+    @Transactional
+    public void update(Instructor in) {
+        em.merge(in);
+    }
+
+    @Override 
+    @Transactional 
+    public void update(Student student) {
+        em.merge(student);
+    }
+    
+    @Override 
+    @Transactional 
+    public void updateCourse(Course tCourse) {
+        em.merge(tCourse);
+    }
 }
