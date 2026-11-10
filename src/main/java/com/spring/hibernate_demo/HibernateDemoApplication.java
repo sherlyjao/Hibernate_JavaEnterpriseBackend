@@ -55,11 +55,42 @@ public class HibernateDemoApplication {
 			// findInstructorWithCourse(app);
 			// findCoursesForInstructor(app);
 			// findInstructorWithCourseJoinFetch(app);
-			updateInstructor(app);
+			// updateInstructor(app);
+			// updateCourse(app);
+			// deleteInstructorOnly(app);
+			deleteCourse(app);
 		};
 	}
 
 	//== INSTRUCTOR entity mapping functions
+	private void deleteCourse(AppDao app) {
+		int id = 2;
+		System.out.println("Delete course: " + id);
+
+		app.deleteCourseById(id);
+		System.out.println("Deleted successfully");
+	}
+
+	private void deleteInstructorOnly(AppDao app) {
+		int id = 6;
+		System.out.println("Delete instructor: " + id);
+
+		app.deleteInstructorOnlyById(id);
+		System.out.println("Deleted successfully");
+	}
+
+	private void updateCourse(AppDao app) {
+		int id = 2;
+		System.out.println("Find course id: " + id);
+
+		Course tCourse = app.findCourseById(id);
+
+		tCourse.setTitle("Mathematics");
+
+		System.out.println("Updated");
+		app.updateCourse(tCourse);
+	}
+
 	private void updateInstructor(AppDao app) {
 		int id = 6;
 		System.out.println("Find instructor id: " + id);

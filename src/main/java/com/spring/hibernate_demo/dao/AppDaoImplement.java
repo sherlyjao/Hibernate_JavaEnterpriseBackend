@@ -89,4 +89,34 @@ public class AppDaoImplement implements AppDao {
         em.merge(in);
     }
     
+    @Override 
+    @Transactional 
+    public void updateCourse(Course tCourse) {
+        em.merge(tCourse);
+    }
+
+    @Override
+    public Course findCourseById(int theId) {
+        return em.find(Course.class, theId);
+    }
+
+    @Override 
+    @Transactional 
+    public void deleteInstructorOnlyById(int theId) {
+        Instructor in = findInstructorById(theId);
+        List<Course> courses = in.getCourses();
+        
+        for (Course course: courses) {
+            course.setInstructor(null);
+        }
+
+        em.remove(in);
+    }
+
+    @Override
+    @Transactional
+    public void deleteCourseById(int theId) {
+        em.remove(findCourseById(theId));
+    }
+
 }
