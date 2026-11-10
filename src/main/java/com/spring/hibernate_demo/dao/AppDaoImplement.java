@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.spring.hibernate_demo.entity.Course;
 import com.spring.hibernate_demo.entity.Instructor;
 import com.spring.hibernate_demo.entity.InstructorDetail;
+import com.spring.hibernate_demo.entity.Student;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
@@ -94,6 +95,12 @@ public class AppDaoImplement implements AppDao {
     public void update(Instructor in) {
         em.merge(in);
     }
+
+    @Override 
+    @Transactional 
+    public void update(Student student) {
+        em.merge(student);
+    }
     
     @Override 
     @Transactional 
@@ -137,6 +144,50 @@ public class AppDaoImplement implements AppDao {
         Course course = query.getSingleResult();
 
         return course;
+    }
+
+    @Override 
+    public Course findCourseAndStudentByCourseId(int theId) {
+        TypedQuery<Course> query = em.createQuery(
+            "SELECT c FROM Course c " +
+            "JOIN FETCH c.students " +
+            "WHERE c.id=:data", Course.class
+        );
+        query.setParameter("data", theId);
+
+        Course course = query.getSingleResult();
+
+        return course;
+    }
+
+    @Override 
+    public Student findStudentAndCourseByStudentId(int theId) {
+        TypedQuery<Student> query = em.createQuery(
+            "SELECT s FROM Student s " +
+            "JOIN FETCH s.courses " +
+            "WHERE s.id=:data", Student.class
+        );
+        query.setParameter("data", theId);
+
+        Student student = query.getSingleResult();
+
+        return student;
+    }
+
+    @Override 
+    @Transactional 
+    public void deleteStudentById(int theId) {
+        Student student = em.find(Student.class, theId);
+
+        if (student != null) {
+            List<Course> courses = student.getCourses();
+
+            for (Course course: courses) {
+                course.getStudents().remove(student);
+            }
+        }
+
+        em.remove(student);
     }
 
 }

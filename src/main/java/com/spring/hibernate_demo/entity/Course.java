@@ -10,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -39,6 +41,27 @@ public class Course {
     @JoinColumn (name = "course_id")
     private List<Review> review;
 
+    @ManyToMany (
+        fetch = FetchType.LAZY,
+        cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.PERSIST,
+            CascadeType.REFRESH
+        }
+    )
+    @JoinTable (
+        name = "course_student",
+        joinColumns = @JoinColumn (
+            name = "course_id"
+        ),
+        inverseJoinColumns = @JoinColumn (
+            name = "student_id"
+        )
+    )
+    private List<Student> students;
+
+    
     
     //Constructors
     public Course() {
@@ -66,6 +89,9 @@ public class Course {
         this.review = review;
     }
     
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
     
     //Getters
     public int getId() {
@@ -79,11 +105,15 @@ public class Course {
     public Instructor getInstructor() {
         return instructor;
     }
-
+    
     public List<Review> getReview() {
         return review;
     }
-
+    
+    public List<Student> getStudents() {
+        return students;
+    }
+    
 
     @Override
     public String toString() {
@@ -91,12 +121,20 @@ public class Course {
         "Course [id=" + id + 
         ", title=" + title + "]";
     }
-
+    
     public void addReview(Review rev) {
         if (review == null) {
             review = new ArrayList<>();
         }
-
+        
         review.add(rev);
+    }
+    
+    public void addStudent(Student stud) {
+        if (students == null) {
+            students = new ArrayList<>();
+        }
+
+        students.add(stud);
     }
 }

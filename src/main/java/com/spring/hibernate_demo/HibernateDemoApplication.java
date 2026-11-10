@@ -62,11 +62,80 @@ public class HibernateDemoApplication {
 			// deleteCourse(app);
 			// createCourseAndReviews(app);
 			// retrieveCourseAndReview(app);
-			deleteCourseAndReview(app);
+			// deleteCourseAndReview(app);
+			// createCourseAndStudents(app);
+			// findCourseAndStudents(app);
+			// findStudentAndCourse(app);
+			// addMoreCourseForStudent(app);
+			deleteStudent(app);
 		};
 	}
 
 	//== INSTRUCTOR entity mapping functions
+	private void deleteStudent(AppDao app) {
+		int id = 42;
+		System.out.println("Delete student: " + id);
+
+		app.deleteStudentById(id);
+		System.out.println("Deleted successfully!");
+	}
+
+	private void addMoreCourseForStudent(AppDao app) {
+		int id = 41;
+		Student student = app.findStudentAndCourseByStudentId(id);
+
+		Course course1 = new Course("Gaslighting");
+		Course course2 = new Course("Criminilogy");
+		Course course3 = new Course("The matter of life and death");
+
+		student.addCourse(course1);
+		student.addCourse(course2);
+		student.addCourse(course3);
+
+		System.out.println("Successfully enrolled new course!");
+
+		app.update(student);
+	}
+
+	private void findStudentAndCourse(AppDao app) {
+		int id = 41;
+		Student student = app.findStudentAndCourseByStudentId(id);
+
+		System.out.println("Student: " + student);
+		System.out.println("Courses: " + student.getCourses());
+	}
+
+	private void findCourseAndStudents(AppDao app) {
+		int id = 23;
+
+		Course course = app.findCourseAndStudentByCourseId(id);
+
+		System.out.println("Course: " + course);
+		System.out.println("Students: " + course.getStudents());
+	}
+
+	private void createCourseAndStudents(AppDao app) {
+		Course course = new Course("World Domination");
+
+		//create students
+		Student student1 = new Student(
+			"Light", 
+			"Yagami",
+			"light.yagami@email.com" 
+		);
+		Student student2 = new Student(
+			"Gellert",
+			"Grindlewald",
+			"deathly.hallows@email.com"
+		);
+
+		course.addStudent(student1);
+		course.addStudent(student2);
+
+		app.save(course);
+		System.out.println("Successfully enrolled");
+	}
+
 	private void deleteCourseAndReview(AppDao app) {
 		int id = 21;
 		System.out.println("Delete course: " + id);
@@ -98,7 +167,7 @@ public class HibernateDemoApplication {
 	}
 
 	private void deleteCourse(AppDao app) {
-		int id = 2;
+		int id = 24;
 		System.out.println("Delete course: " + id);
 
 		app.deleteCourseById(id);
