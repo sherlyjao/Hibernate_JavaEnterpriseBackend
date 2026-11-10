@@ -31,6 +31,12 @@ public class AppDaoImplement implements AppDao {
         em.persist(theInstructor);
     }
 
+    @Override 
+    @Transactional 
+    public void save(Course theCourse) {
+        em.persist(theCourse);
+    }
+
     @Override
     public Instructor findInstructorById(int theId) {
         return em.find(Instructor.class, theId);
@@ -117,6 +123,20 @@ public class AppDaoImplement implements AppDao {
     @Transactional
     public void deleteCourseById(int theId) {
         em.remove(findCourseById(theId));
+    }
+
+    @Override 
+    public Course findCourseAndReviewByCourseId(int theId) {
+        TypedQuery<Course> query = em.createQuery(
+            "SELECT c FROM Course c " +
+            "JOIN FETCH c.review " + 
+            "WHERE c.id=:data", Course.class
+        );
+        query.setParameter("data", theId);
+
+        Course course = query.getSingleResult();
+
+        return course;
     }
 
 }

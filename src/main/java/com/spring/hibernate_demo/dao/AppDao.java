@@ -12,6 +12,7 @@ import com.spring.hibernate_demo.entity.InstructorDetail;
 public interface AppDao {
 
     void save(Instructor theInstructor);
+    void save(Course theCourse);
     Instructor findInstructorById(int theId);
     void deleteInstructorById(int theId);
     InstructorDetail findInstructorDetailById(int theId);
@@ -23,4 +24,5 @@ public interface AppDao {
     Course findCourseById(int theId);
     void deleteInstructorOnlyById(int theId);
     void deleteCourseById(int theId);
+    Course findCourseAndReviewByCourseId(int theId);
 }

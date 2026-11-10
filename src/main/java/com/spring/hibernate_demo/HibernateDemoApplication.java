@@ -11,6 +11,7 @@ import com.spring.hibernate_demo.dao.StudentDao;
 import com.spring.hibernate_demo.entity.Course;
 import com.spring.hibernate_demo.entity.Instructor;
 import com.spring.hibernate_demo.entity.InstructorDetail;
+import com.spring.hibernate_demo.entity.Review;
 import com.spring.hibernate_demo.entity.Student;
 
 /**
@@ -58,11 +59,44 @@ public class HibernateDemoApplication {
 			// updateInstructor(app);
 			// updateCourse(app);
 			// deleteInstructorOnly(app);
-			deleteCourse(app);
+			// deleteCourse(app);
+			// createCourseAndReviews(app);
+			// retrieveCourseAndReview(app);
+			deleteCourseAndReview(app);
 		};
 	}
 
 	//== INSTRUCTOR entity mapping functions
+	private void deleteCourseAndReview(AppDao app) {
+		int id = 21;
+		System.out.println("Delete course: " + id);
+
+		app.deleteCourseById(id);
+		System.out.println("Deleted successfully");
+	}
+
+	private void retrieveCourseAndReview(AppDao app) {
+		int id = 21;
+		System.out.println("Get course and reviews from id: " + id);
+
+		Course course = app.findCourseAndReviewByCourseId(id);
+
+		System.out.println(course);
+		System.out.println(course.getReview());
+	}
+
+	private void createCourseAndReviews(AppDao app) {
+		Course course = new Course("DSA");
+
+		//add reviews
+		course.addReview(new Review("Very hard to pass!"));
+		course.addReview(new Review("I had fun!"));
+		course.addReview(new Review("DSA stands for Data Structure Algorithms"));
+
+		System.out.println("Course saved!");
+		app.save(course);
+	}
+
 	private void deleteCourse(AppDao app) {
 		int id = 2;
 		System.out.println("Delete course: " + id);
