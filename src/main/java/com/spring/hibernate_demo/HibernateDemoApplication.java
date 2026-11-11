@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import com.spring.hibernate_demo.dao.AppDao;
-import com.spring.hibernate_demo.dao.StudentDao;
+// import com.spring.hibernate_demo.dao.StudentDao;
 import com.spring.hibernate_demo.entity.Course;
 import com.spring.hibernate_demo.entity.Instructor;
 import com.spring.hibernate_demo.entity.InstructorDetail;
@@ -443,133 +443,133 @@ public class HibernateDemoApplication {
 	// ==========================================
     // STUDENT MAPPING FUNCTIONS
     // ==========================================
-	/**
-	 * Deletes all student records from the database.
-	 * Prints the total row count deleted.
-	 *
-	 * @param studentDao the DAO component used for database operations
-	 */
-	private void deleteAllStudents(StudentDao studentDao) {
-		System.out.println("Deleting all student information...");
-		int rowsDeleted = studentDao.deleteAll();
-		System.out.println("Number of rows deleted: " + rowsDeleted);
-	}
+// 	/**
+// 	 * Deletes all student records from the database.
+// 	 * Prints the total row count deleted.
+// 	 *
+// 	 * @param studentDao the DAO component used for database operations
+// 	 */
+// 	private void deleteAllStudents(StudentDao studentDao) {
+// 		System.out.println("Deleting all student information...");
+// 		int rowsDeleted = studentDao.deleteAll();
+// 		System.out.println("Number of rows deleted: " + rowsDeleted);
+// 	}
 
-	/**
-	 * Deletes a single student entity by ID.
-	 *
-	 * @param studentDao the DAO component used for database operations
-	 */
-	private void deleteStudent(StudentDao studentDao) {
-		//retrieve by specific id
-		int id = 1;
-		System.out.println("Delete ID: " + id);
+// 	/**
+// 	 * Deletes a single student entity by ID.
+// 	 *
+// 	 * @param studentDao the DAO component used for database operations
+// 	 */
+// 	private void deleteStudent(StudentDao studentDao) {
+// 		//retrieve by specific id
+// 		int id = 1;
+// 		System.out.println("Delete ID: " + id);
 
-		studentDao.delete(id);
-	}
+// 		studentDao.delete(id);
+// 	}
 
-	/**
-	 * Retrieves a student entity by ID.
-	 * Modifies and saves the updated record.
-	 *
-	 * @param studentDao the DAO component used for database operations
-	 */
-	private void updateStudent(StudentDao studentDao) {
-		//retrieve by specific id
-		int id = 1;
-		System.out.println("Student ID: " + id);
-		Student student = studentDao.findById(id);
+// 	/**
+// 	 * Retrieves a student entity by ID.
+// 	 * Modifies and saves the updated record.
+// 	 *
+// 	 * @param studentDao the DAO component used for database operations
+// 	 */
+// 	private void updateStudent(StudentDao studentDao) {
+// 		//retrieve by specific id
+// 		int id = 1;
+// 		System.out.println("Student ID: " + id);
+// 		Student student = studentDao.findById(id);
 
-		//change first name
-		System.out.println("Updating student name...");
-		student.setFirstName("Sherly");
+// 		//change first name
+// 		System.out.println("Updating student name...");
+// 		student.setFirstName("Sherly");
 
-		//update
-		studentDao.update(student);
-		System.out.println("Updated student information: " + student);
-	}
+// 		//update
+// 		studentDao.update(student);
+// 		System.out.println("Updated student information: " + student);
+// 	}
 
-	/**
-	 * Queries all students from the database that matches lastName.
-	 * Prints query.
-	 *
-	 * @param studentDao the DAO component used for database operations
-	 */
-	private void queryStudentLastName(StudentDao studentDao) {
-		List<Student> students = studentDao.findByLastName("Ushijima");
+// 	/**
+// 	 * Queries all students from the database that matches lastName.
+// 	 * Prints query.
+// 	 *
+// 	 * @param studentDao the DAO component used for database operations
+// 	 */
+// 	private void queryStudentLastName(StudentDao studentDao) {
+// 		List<Student> students = studentDao.findByLastName("Ushijima");
 
-		//display
-		for(Student s:students) {
-			System.out.println(s);
-		}
-	}
+// 		//display
+// 		for(Student s:students) {
+// 			System.out.println(s);
+// 		}
+// 	}
 
-	/**
-	 * Dsiplays all student records present in the database.
-	 *
-	 * @param studentDao the DAO component used for database operations
-	 */
-	private void queryStudents(StudentDao studentDao) {
-		//get list of all students
-		List<Student> students = studentDao.findAll();
+// 	/**
+// 	 * Dsiplays all student records present in the database.
+// 	 *
+// 	 * @param studentDao the DAO component used for database operations
+// 	 */
+// 	private void queryStudents(StudentDao studentDao) {
+// 		//get list of all students
+// 		List<Student> students = studentDao.findAll();
 
-		//display
-		for(Student s:students) {
-			System.out.println(s);
-		}
-	}
+// 		//display
+// 		for(Student s:students) {
+// 			System.out.println(s);
+// 		}
+// 	}
 
-	/**
-	 * Retrieves and prints details of a specific student by ID.
-	 *
-	 * @param studentDao the DAO component used for database operations
-	 */
-	private void readStudent(StudentDao studentDao) {
-		//retrieve based on id
-		System.out.println("Retrieving student id...");
-		Student student = studentDao.findById(2);
+// 	/**
+// 	 * Retrieves and prints details of a specific student by ID.
+// 	 *
+// 	 * @param studentDao the DAO component used for database operations
+// 	 */
+// 	private void readStudent(StudentDao studentDao) {
+// 		//retrieve based on id
+// 		System.out.println("Retrieving student id...");
+// 		Student student = studentDao.findById(2);
 
-		System.out.println("Found the student " + student);
-	}
+// 		System.out.println("Found the student " + student);
+// 	}
 
-	/**
-	 * Creates new Student entities.
-	 * Saves newly created entity to the database. 
-	 *
-	 * @param studentDao the DAO component used for database operations
-	 */
-	private void createStudent(StudentDao studentDao) {
+// 	/**
+// 	 * Creates new Student entities.
+// 	 * Saves newly created entity to the database. 
+// 	 *
+// 	 * @param studentDao the DAO component used for database operations
+// 	 */
+// 	private void createStudent(StudentDao studentDao) {
 		
-		//Creating student
-		System.out.println("Creating student information...");
-		Student student1 = new Student(
-			"Wakatoshi",
-			"Ushijima",
-			"ushiwaka@email.com"
-		);
+// 		//Creating student
+// 		System.out.println("Creating student information...");
+// 		Student student1 = new Student(
+// 			"Wakatoshi",
+// 			"Ushijima",
+// 			"ushiwaka@email.com"
+// 		);
 
-		Student student2 = new Student(
-			"Zoro",
-			"Roronoa",
-			"three.swords@email.com"
-		);
+// 		Student student2 = new Student(
+// 			"Zoro",
+// 			"Roronoa",
+// 			"three.swords@email.com"
+// 		);
 
-		Student student3 = new Student(
-			"Sherly",
-			"Ushijima",
-			"ushiwaka@email.com"
-		);
+// 		Student student3 = new Student(
+// 			"Sherly",
+// 			"Ushijima",
+// 			"ushiwaka@email.com"
+// 		);
 
-		//Saving student
-		System.out.println("Saving student information...");
-		studentDao.save(student1);
-		studentDao.save(student2);
-		studentDao.save(student3);
+// 		//Saving student
+// 		System.out.println("Saving student information...");
+// 		studentDao.save(student1);
+// 		studentDao.save(student2);
+// 		studentDao.save(student3);
 
-		//display student id for confirmation
-		System.out.println("Saved! Generated id: " + student1.getId());
-		System.out.println("Saved! Generated id: " + student2.getId());
-		System.out.println("Saved! Generated id: " + student3.getId());
-	}
+// 		//display student id for confirmation
+// 		System.out.println("Saved! Generated id: " + student1.getId());
+// 		System.out.println("Saved! Generated id: " + student2.getId());
+// 		System.out.println("Saved! Generated id: " + student3.getId());
+// 	}
 
 }
