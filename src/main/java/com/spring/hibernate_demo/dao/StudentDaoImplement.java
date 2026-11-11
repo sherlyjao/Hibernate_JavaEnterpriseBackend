@@ -20,12 +20,20 @@ public class StudentDaoImplement implements StudentDao {
         this.em = em;
     }
 
+
+    // ==========================================
+    // Save Operations
+    // ==========================================
     @Override 
     @Transactional
     public void save(Student theStudent) {
         em.persist(theStudent);
     }
 
+
+    // ==========================================
+    // Find Operations
+    // ==========================================
     @Override
     public Student findById(Integer id) {
         return em.find(Student.class, id);
@@ -52,12 +60,20 @@ public class StudentDaoImplement implements StudentDao {
         return query.getResultList();
     }
 
+
+    // ==========================================
+    // Update Operations
+    // ==========================================
     @Override
     @Transactional
     public void update(Student theStudent) {
         em.merge(theStudent);
     }
 
+
+    // ==========================================
+    // Delete Operations
+    // ==========================================
     @Override
     @Transactional
     public void delete(Integer id) {
@@ -74,7 +90,7 @@ public class StudentDaoImplement implements StudentDao {
         int numRows = em
             .createQuery("DELETE FROM Student")
             .executeUpdate();
-            
+
         return numRows;
     }
 }

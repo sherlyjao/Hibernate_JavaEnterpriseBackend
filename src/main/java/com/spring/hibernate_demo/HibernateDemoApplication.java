@@ -36,7 +36,7 @@ public class HibernateDemoApplication {
 	@Bean
 	CommandLineRunner commandLineRunner(AppDao app) {
 		return runner -> {
-			//== STUDENT entity
+			//== STUDENT entity ==
 			// createStudent(studentDao);
 			// readStudent(studentDao);
 			// deleteStudent(studentDao);
@@ -46,7 +46,7 @@ public class HibernateDemoApplication {
 			// updateStudent(studentDao);
 
 			
-			//== INSTRUCTOR entity mapping
+			//== INSTRUCTOR entity mapping ==
 			// createInstructor(app);
 			// findInstructor(app);
 			// deleteInstructor(app);
@@ -71,7 +71,14 @@ public class HibernateDemoApplication {
 		};
 	}
 
-	//== INSTRUCTOR entity mapping functions
+	// ==========================================
+    // INSTRUCTOR MAPPING FUNCTIONS
+    // ==========================================
+	/**
+	 * Deletes a student entity by its primary key ID.
+	 *
+	 * @param app the DAO component used for database operations.
+	 */
 	private void deleteStudent(AppDao app) {
 		int id = 42;
 		System.out.println("Delete student: " + id);
@@ -80,6 +87,12 @@ public class HibernateDemoApplication {
 		System.out.println("Deleted successfully!");
 	}
 
+	/**
+	 * Enrolls an existing student into additional courses.
+	 * Persists the updated relationship.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void addMoreCourseForStudent(AppDao app) {
 		int id = 41;
 		Student student = app.findStudentAndCourseByStudentId(id);
@@ -97,6 +110,11 @@ public class HibernateDemoApplication {
 		app.update(student);
 	}
 
+	/**
+	 * Retrieves a student with their courses using a join query.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void findStudentAndCourse(AppDao app) {
 		int id = 41;
 		Student student = app.findStudentAndCourseByStudentId(id);
@@ -105,6 +123,11 @@ public class HibernateDemoApplication {
 		System.out.println("Courses: " + student.getCourses());
 	}
 
+	/**
+	 * Retrieves a course along with its enrolled students.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void findCourseAndStudents(AppDao app) {
 		int id = 23;
 
@@ -114,6 +137,12 @@ public class HibernateDemoApplication {
 		System.out.println("Students: " + course.getStudents());
 	}
 
+	/**
+	 * Creates a new course with associated student entities.
+	 * Saves newly created course to the database.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void createCourseAndStudents(AppDao app) {
 		Course course = new Course("World Domination");
 
@@ -136,6 +165,11 @@ public class HibernateDemoApplication {
 		System.out.println("Successfully enrolled");
 	}
 
+	/**
+	 * Deletes a course entity along with its reviews by ID.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void deleteCourseAndReview(AppDao app) {
 		int id = 21;
 		System.out.println("Delete course: " + id);
@@ -144,6 +178,11 @@ public class HibernateDemoApplication {
 		System.out.println("Deleted successfully");
 	}
 
+	/**
+	 * Retrieves a course and its reviews by course ID.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void retrieveCourseAndReview(AppDao app) {
 		int id = 21;
 		System.out.println("Get course and reviews from id: " + id);
@@ -154,6 +193,12 @@ public class HibernateDemoApplication {
 		System.out.println(course.getReview());
 	}
 
+	/**
+	 * Creates a new course along with new review entries.
+	 * Persists newly created course to the database
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void createCourseAndReviews(AppDao app) {
 		Course course = new Course("DSA");
 
@@ -168,6 +213,11 @@ public class HibernateDemoApplication {
 		app.save(course);
 	}
 
+	/**
+	 * Deletes a course entity from the database by its ID.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void deleteCourse(AppDao app) {
 		int id = 24;
 		System.out.println("Delete course: " + id);
@@ -176,6 +226,12 @@ public class HibernateDemoApplication {
 		System.out.println("Deleted successfully");
 	}
 
+	/**
+	 * Deletes an instructor entity by ID.
+	 * Without deleting their associated courses.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void deleteInstructorOnly(AppDao app) {
 		int id = 6;
 		System.out.println("Delete instructor: " + id);
@@ -184,6 +240,11 @@ public class HibernateDemoApplication {
 		System.out.println("Deleted successfully");
 	}
 
+	/**
+	 * Updates the title of an existing course entity in the database.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void updateCourse(AppDao app) {
 		int id = 2;
 		System.out.println("Find course id: " + id);
@@ -196,6 +257,11 @@ public class HibernateDemoApplication {
 		app.updateCourse(tCourse);
 	}
 
+	/**
+	 * Updates an existing instructor entity in the database.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void updateInstructor(AppDao app) {
 		int id = 6;
 		System.out.println("Find instructor id: " + id);
@@ -208,6 +274,12 @@ public class HibernateDemoApplication {
 		app.update(ins);
 	}
 
+	/**
+	 * Retrieves an instructor along with their courses in a single query.
+	 * Uses JOIN FETCH to prevent lazy loading issues.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void findInstructorWithCourseJoinFetch(AppDao app) {
 		int id = 6;
 		System.out.println("Find instructor id: " + id);
@@ -218,6 +290,12 @@ public class HibernateDemoApplication {
 		System.out.println("Courses: " + ins.getCourses());
 	}
 
+	/**
+	 * Fetches an instructor and their associated courses.
+	 * Via two separate DAO calls and links them manually.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void findCoursesForInstructor(AppDao app) {
 		int id = 6;
 
@@ -235,6 +313,12 @@ public class HibernateDemoApplication {
 		System.out.println(ins.getCourses());
 	}
 
+	/**
+	 * Retrieves an instructor by ID.
+	 * Attempts to access lazy-loaded courses.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void findInstructorWithCourse(AppDao app) {
 		int id = 6;
 		System.out.println("Find instructor id: "+ id);
@@ -244,6 +328,12 @@ public class HibernateDemoApplication {
 		System.out.println("Courses: " + ins.getCourses());
 	}
 
+	/**
+	 * Creates a new instructor and assigned courses.
+	 * Saves all entities.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void createInstructorWithCourse(AppDao app) {
 		Instructor ins = new Instructor(
 			"Osamu", 
@@ -268,6 +358,11 @@ public class HibernateDemoApplication {
 		app.save(ins);
 	}
 
+	/**
+	 * Deletes an instructor detail record by ID.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void deleteInstructorDetail(AppDao app) {
 		int id = 3;
 		System.out.println("Delete id: " + id);
@@ -276,6 +371,12 @@ public class HibernateDemoApplication {
 		System.out.println("Deleted successfully!");
 	}
 
+	/**
+	 * Retrieves an instructor detail record.
+	 * Along with its associated instructor entity.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void findInstructorDetail(AppDao app) {
 		int id = 2;
 		InstructorDetail deets = app.findInstructorDetailById(id);
@@ -284,6 +385,11 @@ public class HibernateDemoApplication {
 		System.out.println("Instructor: " + deets.getInstructor());
 	}
 
+	/**
+	 * Deletes an instructor entity and cascading entities by ID.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void deleteInstructor(AppDao app) {
 		int id = 1;
 		System.out.println("Delete id: " + id);
@@ -292,6 +398,11 @@ public class HibernateDemoApplication {
 		System.out.println("Deleted successfully!");
 	}
 
+	/**
+	 * Retrieves an instructor entity and its associated details by ID.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void findInstructor(AppDao app) {
 		int id = 1;
 		System.out.println("Find id: " + id);
@@ -302,6 +413,12 @@ public class HibernateDemoApplication {
 		System.out.println("Details: " + ins.getInstructorDetail());
 	}
 
+	/**
+	 * Creates a single instructor with details.
+	 * Persists newly created to the database.
+	 *
+	 * @param app the DAO component used for database operations
+	 */
 	private void createInstructor(AppDao app) {
 		System.out.println("Creating instructor information...");
 
@@ -323,95 +440,136 @@ public class HibernateDemoApplication {
 	}
 
 
-	//== STUDENT entity functions
-	// private void deleteAllStudents(StudentDao studentDao) {
-	// 	System.out.println("Deleting all student information...");
-	// 	int rowsDeleted = studentDao.deleteAll();
-	// 	System.out.println("Number of rows deleted: " + rowsDeleted);
-	// }
+	// ==========================================
+    // STUDENT MAPPING FUNCTIONS
+    // ==========================================
+	/**
+	 * Deletes all student records from the database.
+	 * Prints the total row count deleted.
+	 *
+	 * @param studentDao the DAO component used for database operations
+	 */
+	private void deleteAllStudents(StudentDao studentDao) {
+		System.out.println("Deleting all student information...");
+		int rowsDeleted = studentDao.deleteAll();
+		System.out.println("Number of rows deleted: " + rowsDeleted);
+	}
 
-	// private void deleteStudent(StudentDao studentDao) {
-	// 	//retrieve by specific id
-	// 	int id = 1;
-	// 	System.out.println("Delete ID: " + id);
+	/**
+	 * Deletes a single student entity by ID.
+	 *
+	 * @param studentDao the DAO component used for database operations
+	 */
+	private void deleteStudent(StudentDao studentDao) {
+		//retrieve by specific id
+		int id = 1;
+		System.out.println("Delete ID: " + id);
 
-	// 	studentDao.delete(id);
-	// }
+		studentDao.delete(id);
+	}
 
-	// private void updateStudent(StudentDao studentDao) {
-	// 	//retrieve by specific id
-	// 	int id = 1;
-	// 	System.out.println("Student ID: " + id);
-	// 	Student student = studentDao.findById(id);
+	/**
+	 * Retrieves a student entity by ID.
+	 * Modifies and saves the updated record.
+	 *
+	 * @param studentDao the DAO component used for database operations
+	 */
+	private void updateStudent(StudentDao studentDao) {
+		//retrieve by specific id
+		int id = 1;
+		System.out.println("Student ID: " + id);
+		Student student = studentDao.findById(id);
 
-	// 	//change first name
-	// 	System.out.println("Updating student name...");
-	// 	student.setFirstName("Sherly");
+		//change first name
+		System.out.println("Updating student name...");
+		student.setFirstName("Sherly");
 
-	// 	//update
-	// 	studentDao.update(student);
-	// 	System.out.println("Updated student information: " + student);
-	// }
+		//update
+		studentDao.update(student);
+		System.out.println("Updated student information: " + student);
+	}
 
-	// private void queryStudentLastName(StudentDao studentDao) {
-	// 	List<Student> students = studentDao.findByLastName("Ushijima");
+	/**
+	 * Queries all students from the database that matches lastName.
+	 * Prints query.
+	 *
+	 * @param studentDao the DAO component used for database operations
+	 */
+	private void queryStudentLastName(StudentDao studentDao) {
+		List<Student> students = studentDao.findByLastName("Ushijima");
 
-	// 	//display
-	// 	for(Student s:students) {
-	// 		System.out.println(s);
-	// 	}
-	// }
+		//display
+		for(Student s:students) {
+			System.out.println(s);
+		}
+	}
 
-	// private void queryStudents(StudentDao studentDao) {
-	// 	//get list of all students
-	// 	List<Student> students = studentDao.findAll();
+	/**
+	 * Dsiplays all student records present in the database.
+	 *
+	 * @param studentDao the DAO component used for database operations
+	 */
+	private void queryStudents(StudentDao studentDao) {
+		//get list of all students
+		List<Student> students = studentDao.findAll();
 
-	// 	//display
-	// 	for(Student s:students) {
-	// 		System.out.println(s);
-	// 	}
-	// }
+		//display
+		for(Student s:students) {
+			System.out.println(s);
+		}
+	}
 
-	// private void readStudent(StudentDao studentDao) {
-	// 	//retrieve based on id
-	// 	System.out.println("Retrieving student id...");
-	// 	Student student = studentDao.findById(2);
+	/**
+	 * Retrieves and prints details of a specific student by ID.
+	 *
+	 * @param studentDao the DAO component used for database operations
+	 */
+	private void readStudent(StudentDao studentDao) {
+		//retrieve based on id
+		System.out.println("Retrieving student id...");
+		Student student = studentDao.findById(2);
 
-	// 	System.out.println("Found the student " + student);
-	// }
+		System.out.println("Found the student " + student);
+	}
 
-	// private void createStudent(StudentDao studentDao) {
+	/**
+	 * Creates new Student entities.
+	 * Saves newly created entity to the database. 
+	 *
+	 * @param studentDao the DAO component used for database operations
+	 */
+	private void createStudent(StudentDao studentDao) {
 		
-	// 	//Creating student
-	// 	System.out.println("Creating student information...");
-	// 	Student student1 = new Student(
-	// 		"Wakatoshi",
-	// 		"Ushijima",
-	// 		"ushiwaka@email.com"
-	// 	);
+		//Creating student
+		System.out.println("Creating student information...");
+		Student student1 = new Student(
+			"Wakatoshi",
+			"Ushijima",
+			"ushiwaka@email.com"
+		);
 
-	// 	Student student2 = new Student(
-	// 		"Zoro",
-	// 		"Roronoa",
-	// 		"three.swords@email.com"
-	// 	);
+		Student student2 = new Student(
+			"Zoro",
+			"Roronoa",
+			"three.swords@email.com"
+		);
 
-	// 	Student student3 = new Student(
-	// 		"Sherly",
-	// 		"Ushijima",
-	// 		"ushiwaka@email.com"
-	// 	);
+		Student student3 = new Student(
+			"Sherly",
+			"Ushijima",
+			"ushiwaka@email.com"
+		);
 
-	// 	//Saving student
-	// 	System.out.println("Saving student information...");
-	// 	studentDao.save(student1);
-	// 	studentDao.save(student2);
-	// 	studentDao.save(student3);
+		//Saving student
+		System.out.println("Saving student information...");
+		studentDao.save(student1);
+		studentDao.save(student2);
+		studentDao.save(student3);
 
-	// 	//display student id for confirmation
-	// 	System.out.println("Saved! Generated id: " + student1.getId());
-	// 	System.out.println("Saved! Generated id: " + student2.getId());
-	// 	System.out.println("Saved! Generated id: " + student3.getId());
-	// }
+		//display student id for confirmation
+		System.out.println("Saved! Generated id: " + student1.getId());
+		System.out.println("Saved! Generated id: " + student2.getId());
+		System.out.println("Saved! Generated id: " + student3.getId());
+	}
 
 }
