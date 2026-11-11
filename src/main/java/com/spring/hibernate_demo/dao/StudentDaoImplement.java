@@ -71,7 +71,10 @@ public class StudentDaoImplement implements StudentDao {
     @Override 
     @Transactional 
     public int deleteAll() {
-        int numRows = em.createQuery("DELETE FROM Student").executeUpdate();
+        int numRows = em
+            .createQuery("DELETE FROM Student")
+            .executeUpdate();
+            
         return numRows;
     }
 }

@@ -1,14 +1,11 @@
 package com.spring.hibernate_demo.dao;
 
 import java.util.List;
-
 import org.springframework.stereotype.Repository;
-
 import com.spring.hibernate_demo.entity.Course;
 import com.spring.hibernate_demo.entity.Instructor;
 import com.spring.hibernate_demo.entity.InstructorDetail;
 import com.spring.hibernate_demo.entity.Student;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;

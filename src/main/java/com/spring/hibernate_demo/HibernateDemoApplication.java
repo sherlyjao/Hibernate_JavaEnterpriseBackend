@@ -5,7 +5,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
 import com.spring.hibernate_demo.dao.AppDao;
 import com.spring.hibernate_demo.dao.StudentDao;
 import com.spring.hibernate_demo.entity.Course;
@@ -161,7 +160,9 @@ public class HibernateDemoApplication {
 		//add reviews
 		course.addReview(new Review("Very hard to pass!"));
 		course.addReview(new Review("I had fun!"));
-		course.addReview(new Review("DSA stands for Data Structure Algorithms"));
+		course.addReview(new Review(
+			"DSA stands for Data Structure Algorithms"
+		));
 
 		System.out.println("Course saved!");
 		app.save(course);
